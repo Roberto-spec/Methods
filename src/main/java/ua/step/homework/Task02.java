@@ -24,7 +24,10 @@ public class Task02 {
      */
     public static String join(String[] strings) {
         // TODO: удалите исключение и пишите здесь код
-        throw new RuntimeException("Not implemented yet");
+        String stroka=new String();
+        stroka=strings[0];
+        for(int i=1;i< strings.length;i++) stroka=stroka+" "+strings[i];
+        return stroka;
     }
 
     /**
@@ -36,7 +39,10 @@ public class Task02 {
      */
     public static String join(String[] strings, String glue) {
         // TODO: удалите исключение и пишите здесь код
-        throw new RuntimeException("Not implemented yet");
+        String stroka=new String();
+        stroka=strings[0];
+        for(int i=1;i< strings.length;i++) stroka=stroka+glue+strings[i];
+        return stroka;
     }
 
     /**
@@ -46,7 +52,22 @@ public class Task02 {
      */
     public static void sortDesc(String[] strings) {
         // TODO: удалите исключение и пишите здесь код
-        throw new RuntimeException("Not implemented yet");
+
+
+        String buf=new String();
+
+
+        for (int out = strings.length - 1; out >= 1; out--) {  //Внешний цикл
+            for (int in = 0; in < out; in++) {       //Внутренний цик
+                int result = strings[in].compareTo(strings[in + 1]);
+                if (result < 0) {
+                    buf = strings[in];
+                    strings[in] = strings[in + 1];
+                    strings[in + 1] = buf;
+                }
+            }
+        }
+
     }
 
     /**
@@ -56,6 +77,20 @@ public class Task02 {
      */
     public static void sortByWordCount(String[] strings) {
         // TODO: удалите исключение и пишите здесь код
-        throw new RuntimeException("Not implemented yet");
+        String buf=new String();
+
+
+        for (int out = strings.length - 1; out >= 1; out--) {  //Внешний цикл
+            for (int in = 0; in < out; in++) {       //Внутренний цик
+
+
+
+                if (strings[in].length()>strings[in + 1].length()) {
+                    buf = strings[in];
+                    strings[in] = strings[in + 1];
+                    strings[in + 1] = buf;
+                }
+            }
+        }
     }
 }

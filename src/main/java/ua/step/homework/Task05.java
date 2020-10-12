@@ -1,5 +1,5 @@
 package ua.step.homework;
-
+import java.util.Scanner;
 /**
  * В этом задании нет заготовленных методов.
  * Продумайте их самостоятельно.
@@ -39,8 +39,101 @@ package ua.step.homework;
  *
  *
  */
+class Combat_unit{
+	int hp;
+	int atk;
+
+	Combat_unit() {
+		this.hp=0;
+		this.atk=0;
+	}
+	Combat_unit(int hp,int atk) {
+		this.hp=hp;
+		this.atk=atk;
+	}
+	void sethp( int hp){
+		this.hp=hp;
+	}
+	void setatk( int atk){
+		this.atk=atk;
+	}
+	int getHp(){
+		return hp;
+	}
+	int getAtk(){
+		return atk;
+	}
+
+}
+class Army{
+	int cout;
+	Combat_unit[] Kozak=new Combat_unit[50];
+	Army( int count, int atk,int hp){
+		this.cout=count;
+		for (int i=0;i<count;i++){
+			Kozak[i] = new Combat_unit(hp,atk);
+		}
+	}
+	int attack(){
+		int dmg;
+		dmg=cout*Kozak[0].getAtk();
+		return dmg;
+	}
+	void enemydmg(Combat_unit Dragon){
+		cout=cout- (Dragon.getAtk()/Kozak[0].getHp());
+		if(cout>0)Kozak[cout-1].sethp(Kozak[cout-1].getHp()-((Dragon.getAtk()%(Kozak[0].getHp()))));
+
+	}
+}
+
 public class Task05 {
 	public static void main(String[] args) {
 		// TODO: проверяйте ваш код здесь
+		int hp = 0;
+		int atk = 0;
+		Scanner in = new Scanner(System.in);
+		System.out.println("Pls enter hp dragon:");
+		System.out.print("<");
+		hp = in.nextInt();
+		System.out.println("Pls enter atk dragon:");
+		System.out.print("<");
+		atk = in.nextInt();
+		Combat_unit Dragon = new Combat_unit(hp, atk);
+		System.out.println("Pls enter hp kozak:");
+		System.out.print("<");
+		hp = in.nextInt();
+		System.out.println("Pls enter atk kozak:");
+		System.out.print("<");
+		atk = in.nextInt();
+		Army army = new Army(20,atk,hp);
+
+		while (true){
+			Dragon.sethp(Dragon.getHp()- army.attack());
+			System.out.print("Kozaks has been attak(dmg "+ army.attack() +") - ");
+			if(Dragon.getHp()<=0){
+				System.out.println(" Dragon died!");
+				break;
+			}
+			else{
+				System.out.println("Dragon have "+Dragon.getHp());
+			}
+			army.enemydmg(Dragon);
+			System.out.print("Dragon has been attak(dmg "+ Dragon.getAtk() +") - ");
+			if(army.cout<=0){
+				System.out.println(" ALL kozaks died!");
+				break;
+			}
+			else if (army.Kozak[army.cout-1].getHp()<hp){
+				System.out.println("Left "+army.cout +" Kozaks but 1 Kozak have blood and he have "+army.Kozak[army.cout-1].getHp()+" hp");
+			}
+			else{
+				System.out.println("Left "+army.cout +" Kozaks");
+			}
+
+		}
+
+
 	}
 }
+
+

@@ -26,7 +26,17 @@ public class Task01 {
 	 */
 	public static int[][] createOne (int n, int m) {
 		// TODO: удалите исключение и пишите здесь код
-		throw new RuntimeException("Not implemented yet");
+		int[][] mss=new int[n][m];
+		int y=0;
+		for (int i=0; i<n;i++){
+			if(y<m) {
+				mss[i][y] = 1;
+				y++;
+			}
+			else break;
+
+		}
+		return mss;
 	}
 
 	/**
@@ -37,7 +47,14 @@ public class Task01 {
 	 */
 	public static int[][] createNull (int n, int m) {
 		// TODO: удалите исключение и пишите здесь код
-		throw new RuntimeException("Not implemented yet");
+		int[][] mss=new int[n][m];
+		for (int i=0; i<n;i++){
+			for (int y=0; y<m;y++){
+				mss[i][y]=0;
+			}
+		}
+
+		return mss;
 	}
 
 	/**
@@ -48,7 +65,16 @@ public class Task01 {
 	 */
 	public static int[][] sumMatrix(int[][] one, int[][] two) {
 		// TODO: удалите исключение и пишите здесь код
-		throw new RuntimeException("Not implemented yet");
+
+		int[][] mss=new int[one.length][one[0].length];
+		for (int i=0; i<one.length;i++){
+			for (int y=0; y<one[0].length;y++){
+				mss[i][y]=one[i][y]+two[i][y];
+			}
+		}
+
+		return mss;
+
 	}
 
 	/**
@@ -58,8 +84,13 @@ public class Task01 {
 	 * @return произведение матриц
 	 */
 	public static int[][] productMatrix(int[][] one, int[][] two) {
-		// TODO: удалите исключение и пишите здесь код
-		throw new RuntimeException("Not implemented yet");
+		int[][] mss=new int[one.length][two[0].length];
+		for (int i=0; i<one.length; ++i)
+			for (int j=0; j<two[0].length; ++j)
+				for (int k=0; k<two.length; ++k)
+					mss[i][j] += one[i][k] * two[k][j];
+
+		return mss;
 	}
 
 	/**
@@ -69,8 +100,14 @@ public class Task01 {
 	 * @return произведение матрицы на скаляр
 	 */
 	public static int[][] productMatrix(int[][] matrix, int num) {
-		// TODO: удалите исключение и пишите здесь код
-		throw new RuntimeException("Not implemented yet");
+		int[][] mss=new int[matrix.length][matrix[0].length];
+		for (int i=0; i<matrix.length;i++){
+			for (int y=0; y<matrix[0].length;y++){
+				mss[i][y]=matrix[i][y]*num;
+			}
+		}
+
+		return mss;
 	}
 
 	/**
@@ -79,8 +116,29 @@ public class Task01 {
 	 * @return детерминант матрицы
 	 */
 	public static int determinant(int[][] matrix) {
-		// TODO: удалите исключение и пишите здесь код
-		throw new RuntimeException("Not implemented yet");
+		int n = matrix.length;
+		if(n == 1) return matrix[0][0];
+		int ans = 0;
+		int B[][] = new int [n-1][n-1];
+		int l = 1;
+		for(int i = 0; i < n; ++i){
+
+			int x = 0, y = 0;
+			for(int j = 1; j < n; ++j){
+				for(int k = 0; k < n; ++k){
+					if(i == k) continue;
+					B[x][y] = matrix[j][k];
+					++y;
+					if(y == n - 1){
+						y = 0;
+						++x;
+					}
+				}
+			}
+			ans += l * matrix[0][i] * determinant(B);
+			l *= (-1);
+		}
+		return ans;
 	}
 
 	/**
@@ -88,7 +146,11 @@ public class Task01 {
 	 * @param matrix - матрица
 	 */
 	public static void printMatrix(int[][] matrix) {
-		// TODO: удалите исключение и пишите здесь код
-		throw new RuntimeException("Not implemented yet");
+		for (int i=0; i<matrix.length;i++){
+			for (int y=0; y<matrix[0].length;y++){
+				System.out.print(matrix[i][y]+" ");
+			}
+			System.out.println();
+		}
 	}
 }
